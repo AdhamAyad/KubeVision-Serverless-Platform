@@ -41,6 +41,8 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan -parallelism=10 -no-color
+        env:
+          TF_LOG: INFO
 
       - name: Terraform Apply
         run: terraform apply -auto-approve -input=false
