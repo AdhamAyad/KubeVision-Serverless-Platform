@@ -7,7 +7,7 @@ variable "aws_region" {
 variable "project_name" {
   description = "The name of the project"
   type        = string
-  default     = "KubeVision-Serverless-Platform"
+  default     = "KubeVision-Platform"
 }
 
 variable "environment" {
