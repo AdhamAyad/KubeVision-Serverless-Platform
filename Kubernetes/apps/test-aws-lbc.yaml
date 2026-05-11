@@ -1,18 +1,18 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: test-aws-lbc
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: 'https://github.com/AdhamAyad/KubeVision-Serverless-Platform.git'
-    targetRevision: main
-    path: Kubernetes/tests/aws-load-balancer-controller
-  destination:
-    server: 'https://kubernetes.default.svc'
-    namespace: default
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: test-aws-lbc
+#   namespace: argocd
+# spec:
+#   project: default
+#   source:
+#     repoURL: 'https://github.com/AdhamAyad/KubeVision-Serverless-Platform.git'
+#     targetRevision: main
+#     path: Kubernetes/tests/aws-load-balancer-controller
+#   destination:
+#     server: 'https://kubernetes.default.svc'
+#     namespace: default
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
