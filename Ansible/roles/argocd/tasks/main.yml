@@ -16,3 +16,15 @@
       server:
         service:
           type: "{{ argocd_service_type }}"
+
+- name: Get ArgoCD admin password
+  kubernetes.core.k8s_info:
+    kind: Secret
+    name: argocd-initial-admin-secret
+    namespace: "{{ argocd_namespace }}"
+  register: argo_secret
+
+- name: Print ArgoCD Credentials
+  debug:
+    msg: 
+      - "Admin Password is: {{ argo_secret.resources[0].data.password | b64decode }}"
