@@ -3,6 +3,10 @@
 # metadata:
 #   name: test-aws-lbc
 #   namespace: argocd
+#   finalizers:
+#     - resources-finalizer.argocd.argoproj.io
+#   annotations:
+#     argocd.argoproj.io/sync-wave: "1"
 # spec:
 #   project: default
 #   source:
