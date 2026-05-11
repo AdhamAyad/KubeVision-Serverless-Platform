@@ -3,7 +3,7 @@ module "eks" {
   version = "~> 20.0"
 
   cluster_name    = "${var.project_name}-${var.environment}"
-  cluster_version = "1.29"
+  cluster_version = "1.31"
 
   cluster_endpoint_public_access = true
   cluster_endpoint_private_access = true
@@ -26,6 +26,7 @@ module "eks" {
       desired_size = 2 
 
       instance_types = ["t3.medium"]
+      ami_type       = "AL2023_x86_64"
       capacity_type  = "ON_DEMAND" 
       subnets = module.vpc.private_subnets
     }
