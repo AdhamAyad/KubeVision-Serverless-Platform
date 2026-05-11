@@ -16,7 +16,9 @@ module "eks" {
     kube-proxy             = {}
     vpc-cni                = {}
     eks-pod-identity-agent = {} 
-    aws-ebs-csi-driver     = {} 
+    aws-ebs-csi-driver     = {
+      service_account_role_arn = module.ebs_csi_irsa_role.iam_role_arn
+    } 
   }
 
   eks_managed_node_groups = {
@@ -32,8 +34,6 @@ module "eks" {
     }
   }
 
-  
-
   enable_cluster_creator_admin_permissions = true
   authentication_mode                      = "API_AND_CONFIG_MAP"
 
@@ -41,4 +41,6 @@ module "eks" {
     Environment = var.environment
     Project     = var.project_name
   }
+
+  depends_on = [ module.vpc ]
 }
