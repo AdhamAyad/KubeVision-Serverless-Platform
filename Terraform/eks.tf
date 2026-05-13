@@ -27,7 +27,7 @@ module "eks" {
       max_size     = 3
       desired_size = 2 
 
-      instance_types = ["t3.medium"]
+      instance_types = ["m7i-flex.large"]
       ami_type       = "AL2023_x86_64_STANDARD"
       capacity_type  = "ON_DEMAND" 
       subnets = module.vpc.private_subnets
