@@ -34,6 +34,17 @@ module "eks" {
     }
   }
 
+  node_security_group_additional_rules = {
+  ingress_istio_webhook = {
+    description                   = "Allow API Server to reach Istio Webhook"
+    protocol                      = "tcp"
+    from_port                     = 15017
+    to_port                       = 15017
+    type                          = "ingress"
+    source_cluster_security_group = true
+  }
+  }
+
   enable_cluster_creator_admin_permissions = true
   authentication_mode                      = "API_AND_CONFIG_MAP"
 
