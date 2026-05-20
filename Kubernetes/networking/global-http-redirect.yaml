@@ -10,7 +10,8 @@ spec:
     sectionName: http-main
   - name: kubevision-gateway
     sectionName: http-wildcard
-
+  hostnames:
+  - "*.creative.opik.net"
   rules:
     filters:
     - type: RequestRedirect
