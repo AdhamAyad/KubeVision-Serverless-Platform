@@ -6,6 +6,9 @@ metadata:
 spec:
   parentRefs:
   - name: kubevision-gateway
+    sectionName: http-wildcard
+  - name: kubevision-gateway
+    sectionName: http-main
   rules:
   - filters:
     - type: RequestRedirect
