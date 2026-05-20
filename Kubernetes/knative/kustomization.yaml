@@ -4,4 +4,6 @@ kind: Kustomization
 resources:
   - serving-core.yaml
   - serving-gateway-api.yaml
-  - configs.yaml
+  - config-domain.yaml
+  - config-network.yaml
+  - config-gateway.yaml
