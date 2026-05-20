@@ -1,18 +1,25 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: force-https-redirect
-  namespace: kubevision-ingress
+  name: global-http-redirect
+  namespace: kubevision-ingress 
 spec:
   parentRefs:
   - name: kubevision-gateway
-    sectionName: http-wildcard
-  - name: kubevision-gateway
     sectionName: http-main
+  - name: kubevision-gateway
+    sectionName: http-wildcard
+  hostnames:
+  - "*.creative.opik.net"
+  - "creative.opik.net"
+  - "frontend.creative.opik.net"
   rules:
-  - filters:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    filters:
     - type: RequestRedirect
       requestRedirect:
         scheme: https
-        port: 443
         statusCode: 301
