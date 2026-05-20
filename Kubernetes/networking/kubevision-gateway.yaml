@@ -19,13 +19,13 @@ spec:
       namespaces:
         from: All
 
-  - name: http-wildcard
-    protocol: HTTP
-    port: 80
-    hostname: "*.creative.opik.net"
-    allowedRoutes:
-      namespaces:
-        from: All
+  # - name: http-wildcard
+  #   protocol: HTTP
+  #   port: 80
+  #   hostname: "*.creative.opik.net"
+  #   allowedRoutes:
+  #     namespaces:
+  #       from: All
 
   - name: https-main
     protocol: HTTPS
