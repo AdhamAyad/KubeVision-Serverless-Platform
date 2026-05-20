@@ -4,6 +4,38 @@ kind: Kustomization
 resources:
   - serving-core.yaml
   - serving-gateway-api.yaml
-  - config-domain.yaml
-  - config-network.yaml
-  - config-gateway.yaml
+
+patches:
+  - target:
+      kind: ConfigMap
+      name: config-domain
+      namespace: knative-serving
+    patch: |-
+      - op: replace
+        path: /data/creative.opik.net
+        value: ""
+  - target:
+      kind: ConfigMap
+      name: config-network
+      namespace: knative-serving
+    patch: |-
+      - op: replace
+        path: /data/ingress-class
+        value: "gateway-api.ingress.networking.knative.dev"
+      - op: replace
+        path: /data/default-external-scheme
+        value: "https"
+  - target:
+      kind: ConfigMap
+      name: config-gateway
+      namespace: knative-serving
+    patch: |-
+      - op: replace
+        path: /data/gateway-api.external-gateway
+        value: "kubevision-ingress/kubevision-gateway"
+      - op: replace
+        path: /data/gateway-api.local-gateway
+        value: "kubevision-ingress/kubevision-gateway"
+      - op: replace
+        path: /data/gateway-api.section-name
+        value: "https-wildcard"
