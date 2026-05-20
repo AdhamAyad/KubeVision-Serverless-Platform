@@ -4,7 +4,6 @@ metadata:
   name: config-domain
   namespace: knative-serving
 data:
-  # 1. ربط المنصة بالدومين بتاعك
   creative.opik.net: ""
 ---
 apiVersion: v1
