@@ -14,13 +14,5 @@ spec:
     - type: RequestRedirect
       requestRedirect:
         scheme: https
+        port: 443
         statusCode: 301
-  - filters:
-    - matches:
-    - path:
-        type: PathPrefix
-        value: /
-    filters:
-    - type: RequestRedirect
-      requestRedirect:
-        scheme: https
