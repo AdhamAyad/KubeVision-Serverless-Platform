@@ -13,7 +13,11 @@ spec:
   - "*.creative.opik.net"
   - "creative.opik.net"
   rules:
-  - filters:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    filters:
     - type: RequestRedirect
       requestRedirect:
         scheme: https
