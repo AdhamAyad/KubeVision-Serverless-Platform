@@ -6,38 +6,34 @@ resources:
   - serving-gateway-api.yaml
 
 patches:
-  - target:
+  - patch: |-
+      apiVersion: v1
       kind: ConfigMap
-      name: config-domain
-      namespace: knative-serving
-    patch: |-
-      - op: replace
-        path: /data/creative.opik.net
-        value: ""
-  - target:
+      metadata:
+        name: config-domain
+        namespace: knative-serving
+      data:
+        creative.opik.net: ""
+
+  - patch: |-
+      apiVersion: v1
       kind: ConfigMap
-      name: config-network
-      namespace: knative-serving
-    patch: |-
-      - op: replace
-        path: /data/ingress-class
-        value: "gateway-api.ingress.networking.knative.dev"
-      - op: replace
-        path: /data/default-external-scheme
-        value: "https"
-      - op: add
-        path: /data/domain-template
-        value: "{{.Name}}.{{.Domain}}"
-  - target:
+      metadata:
+        name: config-network
+        namespace: knative-serving
+      data:
+        ingress-class: "gateway-api.ingress.networking.knative.dev"
+        default-external-scheme: "https"
+        domain-template: "{{.Name}}.{{.Domain}}"
+
+  - patch: |-
+      apiVersion: v1
       kind: ConfigMap
-      name: config-gateway
-      namespace: knative-serving
-    patch: |-
-      - op: replace
-        path: /data/external-gateways
-        value: |-
+      metadata:
+        name: config-gateway
+        namespace: knative-serving
+      data:
+        external-gateways: |
           - gateway: kubevision-ingress/kubevision-gateway
-      - op: replace
-        path: /data/local-gateways
-        value: |-
+        local-gateways: |
           - gateway: kubevision-ingress/kubevision-gateway
