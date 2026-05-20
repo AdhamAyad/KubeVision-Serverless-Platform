@@ -12,7 +12,6 @@ spec:
   hostnames:
   - "*.creative.opik.net"
   - "creative.opik.net"
-  - "frontend.creative.opik.net"
   rules:
   - matches:
     - path:
