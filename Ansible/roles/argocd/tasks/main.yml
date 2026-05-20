@@ -1,5 +1,10 @@
 ---
 # tasks file for roles/argocd
+- name: Apply Gateway API Standard CRDs
+  ansible.builtin.command: kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.1.0/standard-install.yaml
+  register: gateway_api_result
+  changed_when: "'created' in gateway_api_result.stdout or 'configured' in gateway_api_result.stdout"
+  
 - name: Add ArgoCD Helm repository
   kubernetes.core.helm_repository:
     name: argo
@@ -14,6 +19,8 @@
     wait: yes 
     values:
       server:
+        extraArgs:
+          - --insecure
         service:
           type: "{{ argocd_service_type }}"
 

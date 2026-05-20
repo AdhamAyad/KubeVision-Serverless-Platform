@@ -1,4 +1,4 @@
 ---
 # defaults file for roles/argocd
 argocd_namespace: argocd
-argocd_service_type: LoadBalancer
+argocd_service_type: ClusterIP
