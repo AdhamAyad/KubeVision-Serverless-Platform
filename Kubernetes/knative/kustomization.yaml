@@ -34,6 +34,8 @@ patches:
         namespace: knative-serving
       data:
         external-gateways: |
-          - gateway: kubevision-ingress/kubevision-gateway
+          - class: istio
+            gateway: kubevision-ingress/kubevision-gateway
         local-gateways: |
-          - gateway: kubevision-ingress/kubevision-gateway
+          - class: istio
+            gateway: kubevision-ingress/kubevision-gateway
