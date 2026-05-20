@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: 'https://github.com/AdhamAyad/KubeVision-Serverless-Platform.git'
     targetRevision: main
-    path: Kubernetes\knative
+    path: Kubernetes/knative
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: knative-serving
