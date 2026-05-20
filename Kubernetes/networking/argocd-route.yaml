@@ -7,7 +7,7 @@ spec:
   parentRefs:
   - name: kubevision-gateway
     namespace: kubevision-ingress
-    sectionName: http-wildcard
+    sectionName: https-wildcard
   hostnames:
   - "argo.creative.opik.net"
   rules:

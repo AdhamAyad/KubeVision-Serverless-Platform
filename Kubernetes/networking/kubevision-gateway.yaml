@@ -31,10 +31,10 @@ spec:
     protocol: HTTPS
     port: 443
     hostname: "creative.opik.net"
-    # tls:
-    #   mode: Terminate
-    #   certificateRefs:
-    #     - name: creative-cert-secret
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: creative-tls-secret
     allowedRoutes:
       namespaces:
         from: All
@@ -43,10 +43,10 @@ spec:
     protocol: HTTPS
     port: 443
     hostname: "*.creative.opik.net"
-    # tls:
-    #   mode: Terminate
-    #   certificateRefs:
-    #     - name: creative-wildcard-cert-secret
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: creative-tls-secret
     allowedRoutes:
       namespaces:
         from: All
