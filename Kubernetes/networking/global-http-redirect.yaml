@@ -14,8 +14,8 @@ spec:
   - "creative.opik.net"
   rules:
   - matches:
-    - path:
-        type: PathPrefix
+    - path:safessadafe: truesa
+        type: Pa\\\\\\thPrefix
         value: /
     filters:
     - type: RequestRedirect
