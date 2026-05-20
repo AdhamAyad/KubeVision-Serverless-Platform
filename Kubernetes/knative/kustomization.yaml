@@ -34,11 +34,12 @@ patches:
       namespace: knative-serving
     patch: |-
       - op: replace
-        path: /data/gateway-api.external-gateway
-        value: "kubevision-ingress/kubevision-gateway"
+        path: /data/external-gateways
+        value: |-
+          - name: kubevision-gateway
+            namespace: kubevision-ingress
       - op: replace
-        path: /data/gateway-api.local-gateway
-        value: "kubevision-ingress/kubevision-gateway"
-      - op: replace
-        path: /data/gateway-api.section-name
-        value: "https-wildcard"
+        path: /data/local-gateways
+        value: |-
+          - name: kubevision-gateway
+            namespace: kubevision-ingress
