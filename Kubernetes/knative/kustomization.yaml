@@ -35,11 +35,7 @@ patches:
     patch: |-
       - op: replace
         path: /data/external-gateways
-        value: |-
-          - name: kubevision-gateway
-            namespace: kubevision-ingress
+        value: "kubevision-ingress/kubevision-gateway"
       - op: replace
         path: /data/local-gateways
-        value: |-
-          - name: kubevision-gateway
-            namespace: kubevision-ingress
+        value: "kubevision-ingress/kubevision-gateway"
