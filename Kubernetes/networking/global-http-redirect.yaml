@@ -13,12 +13,17 @@ spec:
   - "*.creative.opik.net"
   - "creative.opik.net"
   rules:
-  - matches:
-    - path:safessadafe: truesa
-        type: Pa\\\\\\thPrefix
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        statusCode: 301
+  - filters:
+    - matches:
+    - path:
+        type: PathPrefix
         value: /
     filters:
     - type: RequestRedirect
       requestRedirect:
         scheme: https
-        statusCode: 301
