@@ -4,19 +4,14 @@ metadata:
   name: global-http-redirect
   namespace: kubevision-ingress 
 spec:
+
   parentRefs:
   - name: kubevision-gateway
     sectionName: http-main
   - name: kubevision-gateway
     sectionName: http-wildcard
-  hostnames:
-  - "*.creative.opik.net"
-  - "creative.opik.net"
+
   rules:
-  - matches:
-    - path:
-        type: PathPrefix
-        value: /
     filters:
     - type: RequestRedirect
       requestRedirect:
