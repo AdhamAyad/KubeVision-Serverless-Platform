@@ -25,6 +25,7 @@ patches:
         ingress-class: "gateway-api.ingress.networking.knative.dev"
         default-external-scheme: "https"
         domain-template: "{{.Name}}.{{.Domain}}"
+        httpProtocol: "Redirected"
 
   - patch: |-
       apiVersion: v1
