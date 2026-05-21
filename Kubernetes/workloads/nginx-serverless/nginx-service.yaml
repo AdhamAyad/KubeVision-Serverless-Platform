@@ -12,7 +12,6 @@ spec:
         autoscaling.knative.dev/metric: "concurrency"
         autoscaling.knative.dev/target: "10"
         autoscaling.knative.dev/window: "60s"
-        networking.knative.dev/ingress.class: "istio.ingress.networking.knative.dev"
     spec:
       containers:
         - image: traefik/whoami:latest
