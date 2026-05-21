@@ -19,3 +19,7 @@ spec:
             - containerPort: 80     
   traffic:
     - latestRevision: true
+      percent: 0         
+      tag: canary         
+    - revisionName: frontend-00001 
+      percent: 100
