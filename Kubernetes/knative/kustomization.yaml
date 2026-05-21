@@ -26,6 +26,7 @@ patches:
         default-external-scheme: "https"
         domain-template: "{{.Name}}.{{.Domain}}"
         httpProtocol: "Redirected"
+        ingress-observation-period: "0s"
 
   - patch: |-
       apiVersion: v1
