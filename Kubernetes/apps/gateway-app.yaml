@@ -15,7 +15,7 @@ spec:
     path: Kubernetes/networking
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: kubevision-ingress
+    namespace: istio-system
   syncPolicy:
     automated:
       prune: true
