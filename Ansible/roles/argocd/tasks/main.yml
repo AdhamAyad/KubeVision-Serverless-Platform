@@ -5,6 +5,11 @@
   register: gateway_api_result
   changed_when: "'created' in gateway_api_result.stdout or 'configured' in gateway_api_result.stdout"
   
+- name: Install Kubernetes Metrics Server
+  ansible.builtin.command: kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+  register: metrics_server_result
+  changed_when: "'created' in metrics_server_result.stdout or 'configured' in metrics_server_result.stdout"
+
 - name: Add ArgoCD Helm repository
   kubernetes.core.helm_repository:
     name: argo
