@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - serving-core.yaml
-  - serving-gateway-api.yaml
+  - net-istio.yaml
 
 patches:
   - patch: |-
@@ -22,17 +22,29 @@ patches:
         name: config-network
         namespace: knative-serving
       data:
-        ingress-class: "gateway-api.ingress.networking.knative.dev"
+        ingress-class: "istio.ingress.networking.knative.dev"
         default-external-scheme: "https"
         domain-template: "{{.Name}}.{{.Domain}}"
-        httpProtocol: "Disabled"
+        httpProtocol: "Redirected"
 
   - patch: |-
       apiVersion: v1
       kind: ConfigMap
       metadata:
-        name: config-gateway
+        name: config-istio
         namespace: knative-serving
       data:
-        external-gateways: '[{"class": "istio", "gateway": "kubevision-ingress/kubevision-gateway", "service": "kubevision-ingress/kubevision-gateway-istio"}]'
-        local-gateways: '[{"class": "istio", "gateway": "kubevision-ingress/kubevision-gateway", "service": "kubevision-ingress/kubevision-gateway-istio"}]'
+        gateway.istio-system.kubevision-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
+        local-gateway.istio-system.kubevision-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
+
+  - patch: |-
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: config-gc
+        namespace: knative-serving
+      data:
+        retain-since-create-time: "48h"
+        retain-since-last-active-time: "15h"
+        min-non-active-revisions: "2"
+        max-non-active-revisions: "5"
