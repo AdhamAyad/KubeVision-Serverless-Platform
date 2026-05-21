@@ -34,7 +34,8 @@ patches:
         name: config-istio
         namespace: knative-serving
       data:
-        gateway.istio-system.kubevision-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
+        gateway.knative-serving.knative-ingress-gateway: "istio-ingressgateway.istio-system.svc.cluster.local"
+        local-gateway.mesh: "mesh"
 
   - patch: |-
       apiVersion: v1
