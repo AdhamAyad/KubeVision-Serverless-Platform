@@ -7,7 +7,7 @@ spec:
   hosts:
   - "argo.creative.opik.net"
   gateways:
-  - istio-system/creative-gateway
+  - istio-system/kubevision-gateway
   http:
   - match:
     - uri:
