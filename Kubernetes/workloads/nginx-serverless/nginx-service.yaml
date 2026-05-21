@@ -14,12 +14,6 @@ spec:
         autoscaling.knative.dev/window: "60s"
     spec:
       containers:
-        - image: traefik/whoami:latest
+        - image: gcr.io/google-samples/hello-app:1.0
           ports:
-            - containerPort: 80
-  traffic:
-    - latestRevision: true 
-      percent: 50          
-      tag: canary          
-    - revisionName: frontend-00002 
-      percent: 50
+            - containerPort: 8080     
