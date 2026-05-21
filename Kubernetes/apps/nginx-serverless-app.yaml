@@ -8,6 +8,14 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
+  ignoreDifferences:
+  - group: serving.knative.dev
+    kind: Service
+    jsonPointers:
+    - /metadata/annotations/serving.knative.dev~1routes
+    - /metadata/annotations/serving.knative.dev~1routingStateModified
+    - /status
+    - /spec/traffic
   project: default
   source:
     repoURL: 'https://github.com/AdhamAyad/KubeVision-Serverless-Platform.git'
