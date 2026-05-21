@@ -15,7 +15,6 @@ spec:
     path: Kubernetes/networking
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: istio-system
   syncPolicy:
     automated:
       prune: true
