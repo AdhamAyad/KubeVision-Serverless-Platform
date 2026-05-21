@@ -30,13 +30,14 @@
           type: "{{ argocd_service_type }}"
 
 - name: Get ArgoCD admin password
-  kubernetes.core.k8s_info:
-    kind: Secret
-    name: argocd-initial-admin-secret
-    namespace: "{{ argocd_namespace }}"
-  register: argo_secret
+  ansible.builtin.command: >
+    kubectl get secret argocd-initial-admin-secret 
+    -n {{ argocd_namespace }} 
+    -o jsonpath="{.data.password}"
+  register: argo_secret_raw
+  changed_when: false
 
 - name: Print ArgoCD Credentials
   debug:
     msg: 
-      - "Admin Password is: {{ argo_secret.resources[0].data.password | b64decode }}"
+      - "Admin Password is: {{ argo_secret_raw.stdout | b64decode }}"
