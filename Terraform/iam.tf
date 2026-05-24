@@ -57,6 +57,7 @@ module "ebs_csi_irsa_role" {
   }
 }
 
+// Convert this block to terraform module
 data "http" "lb_policy_json" {
   url = "https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/main/docs/install/iam_policy.json"
 }

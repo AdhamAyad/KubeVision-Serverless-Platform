@@ -4,8 +4,7 @@ kind: Kustomization
 resources:
   - serving-core.yaml
   - net-istio.yaml
-  - serving-crds.yaml
-
+  
 patches:
   - patch: |-
       apiVersion: v1

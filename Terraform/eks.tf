@@ -3,7 +3,7 @@ module "eks" {
   version = "~> 20.0"
 
   cluster_name    = "${var.project_name}-${var.environment}"
-  cluster_version = "1.31"
+  cluster_version = "1.32"
 
   cluster_endpoint_public_access = true
   cluster_endpoint_private_access = true
@@ -12,13 +12,14 @@ module "eks" {
   subnet_ids = module.vpc.private_subnets
 
   cluster_addons = {
-    coredns                = {}
-    kube-proxy             = {}
-    vpc-cni                = {}
-    eks-pod-identity-agent = {} 
+    coredns                = { resolve_conflicts_on_update = "PRESERVE" }
+    kube-proxy             = { resolve_conflicts_on_update = "PRESERVE" }
+    vpc-cni                = { resolve_conflicts_on_update = "PRESERVE" }
+    eks-pod-identity-agent = { resolve_conflicts_on_update = "PRESERVE" }
     aws-ebs-csi-driver     = {
-      service_account_role_arn = module.ebs_csi_irsa_role.iam_role_arn
-    } 
+      resolve_conflicts_on_update = "PRESERVE"
+      service_account_role_arn    = module.ebs_csi_irsa_role.iam_role_arn
+    }
   }
 
   eks_managed_node_groups = {
