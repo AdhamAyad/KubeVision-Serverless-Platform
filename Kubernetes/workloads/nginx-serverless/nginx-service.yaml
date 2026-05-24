@@ -19,6 +19,6 @@ spec:
             - containerPort: 8080
   traffic:
     - revisionName: "frontend-00001" 
-      percent: 50
+      percent: 0
     - latestRevision: true           
-      percent: 50
+      percent: 100
