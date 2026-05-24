@@ -21,4 +21,4 @@ spec:
     - revisionName: "frontend-00001" 
       percent: 50
     - latestRevision: true
-      percent: 50
+      percent: 0
