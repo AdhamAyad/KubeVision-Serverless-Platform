@@ -1,28 +1,26 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager
+  name: istio-app
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "3" 
+    argocd.argoproj.io/sync-wave: "2" 
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    repoURL: 'https://charts.jetstack.io'
-    targetRevision: v1.14.4
-    chart: cert-manager
-    helm:
-      parameters:
-      - name: installCRDs
-        value: 'true'
+    repoURL: 'https://github.com/AdhamAyad/KubeVision-Serverless-Platform.git'
+    targetRevision: main
+    path: Kubernetes/istio-for-knative
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: cert-manager
+    namespace: istio-system
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - Replace=true
