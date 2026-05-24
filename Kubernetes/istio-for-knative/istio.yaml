@@ -19663,7 +19663,7 @@ metadata:
   name: istio-ingressgateway
   namespace: istio-system
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: istio-ingressgateway
@@ -20230,7 +20230,7 @@ spec:
         averageUtilization: 60
         type: Utilization
     type: Resource
-  minReplicas: 1
+  minReplicas: 3
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
