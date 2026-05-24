@@ -16,4 +16,4 @@ spec:
       containers:
         - image: traefik/whoami
           ports:
-            - containerPort: 8080     
+            - containerPort: 80     
