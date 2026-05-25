@@ -28,6 +28,7 @@ spec:
       namespaces:
         from: Same
 
+#TODO: Don't forget to add Certificate inside kubevision-ingress namesace
   - name: https-main
     protocol: HTTPS
     port: 443
