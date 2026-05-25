@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - serving-core.yaml
   - net-gateway-api.yaml
+
 #! All patches inside seving-core.yaml except config-gateway
 patches:
   - patch: |-
@@ -35,13 +36,13 @@ patches:
         namespace: knative-serving
       data:
         external-gateways: |
-        - name: kubevision-gateway
-          namespace: kubevision-ingress
-          service: kubevision-gateway-istio.kubevision-ingress.svc.cluster.local  
+          - name: kubevision-gateway
+            namespace: kubevision-ingress
+            service: kubevision-gateway-istio.kubevision-ingress.svc.cluster.local
         local-gateways: |
-        - name: internal-gateway
-          namespace: kubevision-ingress
-          service: internal-gateway-istio.kubevision-ingress.svc.cluster.local
+          - name: internal-gateway
+            namespace: kubevision-ingress
+            service: internal-gateway-istio.kubevision-ingress.svc.cluster.local
 
   - patch: |-
       apiVersion: v1
