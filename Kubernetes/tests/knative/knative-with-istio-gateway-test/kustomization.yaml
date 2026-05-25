@@ -5,6 +5,7 @@ resources:
   - serving-core.yaml
   - net-istio.yaml
   
+#! All patches inside seving-core.yaml except config-istio  
 patches:
   - patch: |-
       apiVersion: v1
@@ -26,6 +27,7 @@ patches:
         default-external-scheme: "https"
         domain-template: "{{.Name}}.{{.Domain}}"
 
+  #! this inside net-istio.yaml
   - patch: |-
       apiVersion: v1
       kind: ConfigMap

@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - serving-core.yaml
   - net-gateway-api.yaml
-  
+#! All patches inside seving-core.yaml except config-gateway
 patches:
   - patch: |-
       apiVersion: v1
@@ -25,22 +25,23 @@ patches:
         ingress-class: "gateway-api.ingress.networking.knative.dev"
         default-external-scheme: "https"
         domain-template: "{{.Name}}.{{.Domain}}"
-
+        
+  #! this inside net-gateway-api.yaml
   - patch: |-
       apiVersion: v1
       kind: ConfigMap
       metadata:
-        name: config-gateway-api
+        name: config-gateway
         namespace: knative-serving
       data:
         external-gateways: |
-        - name: kubevision-gateway  
-          namespace: kubevision-ingress     
-          service: kubevision-gateway.kubevision-ingress.svc.cluster.local  
+        - class: istio
+          gateway: kubevision-ingress/kubevision-gateway  
+          service: kubevision-ingress/kubevision-gateway  
         local-gateways: |
-        - name: knative-local-gateway    
-          namespace: knative-serving     
-          service: knative-local-service.knative-serving.svc.cluster.local
+        - class: istio
+          gateway: kubevision-ingress/internal-gateway    
+          service: kubevision-ingress/internal-gateway
 
   - patch: |-
       apiVersion: v1
