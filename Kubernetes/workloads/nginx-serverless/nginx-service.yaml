@@ -17,8 +17,3 @@ spec:
         - image: traefik/whoami
           ports:
             - containerPort: 80
-  traffic:
-    - revisionName: "frontend-00001" 
-      percent: 50
-    - latestRevision: true           
-      percent: 50
