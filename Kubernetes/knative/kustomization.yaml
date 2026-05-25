@@ -35,8 +35,8 @@ patches:
         name: config-gateway
         namespace: knative-serving
       data:
-        external-gateways: '[{"class": "istio", "gateway": "kubevision-ingress/kubevision-gateway", "service": "kubevision-ingress/kubevision-gateway-istio"}]'
-        local-gateways: '[{"class": "istio", "gateway": "kubevision-ingress/internal-gateway", "service": "kubevision-ingress/internal-gateway-istio"}]'
+        external-gateways: '[{"class": "istio", "gateway": "kubevision-ingress/kubevision-gateway"}]'
+        local-gateways: '[{"class": "istio", "gateway": "kubevision-ingress/internal-gateway"}]'
 
   - patch: |-
       apiVersion: v1
