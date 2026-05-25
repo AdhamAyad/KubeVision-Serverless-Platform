@@ -41,7 +41,7 @@ patches:
           namespace: kubevision-ingress
           service: kubevision-gateway-istio.kubevision-ingress.svc.cluster.local  
         local-gateways: |
-          name: internal-gateway
+        - name: internal-gateway
           namespace: kubevision-ingress
           service: internal-gateway-istio.kubevision-ingress.svc.cluster.local
 
