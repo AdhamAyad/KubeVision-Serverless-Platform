@@ -18,6 +18,9 @@ spec:
         runnerScaleSetName: "platform-runner"
         githubConfigUrl: "https://github.com/AdhamAyad/KubeVision-Serverless-Platform"
         githubConfigSecret: "github-runner-token"
+        controllerServiceAccount:
+          namespace: "actions-runner-system"
+          name: "arc-controller-gha-rs-controller"
   destination:
     server: https://kubernetes.default.svc
     namespace: actions-runner-system
