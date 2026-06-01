@@ -14,6 +14,6 @@ spec:
         prefix: /
     route:
     - destination:
-        host: platform-api-svc
+        host: platform-api-svc.platform-apps.svc.cluster.local
         port:
           number: 80 
