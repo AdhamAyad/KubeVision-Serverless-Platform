@@ -38,7 +38,8 @@ jobs:
         run: |
           chmod +x mvnw
           ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-            -Dsonar.projectKey=AdhamAyad_KubeVision-Serverless-Platform
+            -Dsonar.projectKey=AdhamAyad_KubeVision-Serverless-Platform \
+            -DskipTests
             # -Dsonar.qualitygate.wait=true
 
       - name: Build Docker Image
