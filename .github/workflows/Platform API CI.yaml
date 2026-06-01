@@ -53,8 +53,8 @@ jobs:
           exit-code: 0 # Don't fail the build on vulnerabilities, but log them 
           severity: CRITICAL,HIGH
 
-      - name: Log in to Amazon ECR
-        run: aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ vars.ECR_REGISTRY }}
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
 
       - name: Push Image to Amazon ECR
         run: docker push ${{ vars.ECR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
