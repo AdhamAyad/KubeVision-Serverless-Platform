@@ -28,6 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>25</java.version>
+		<sonar.organization>adhamayad</sonar.organization>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -37,6 +38,26 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webmvc</artifactId>
+		</dependency>
+		
+		<dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-client</artifactId>
+            <version>7.1.0</version>
+        </dependency>
+		<dependency>
+    		<groupId>org.projectlombok</groupId>
+    		<artifactId>lombok</artifactId>
+    		<optional>true</optional>
+		</dependency>
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+  		  <artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+    		<groupId>io.fabric8</groupId>
+    		<artifactId>knative-client</artifactId>
+   		    <version>6.10.0</version> 
 		</dependency>
 
 		<dependency>

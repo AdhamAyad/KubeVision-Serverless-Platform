@@ -1,10 +1,10 @@
 # apiVersion: argoproj.io/v1alpha1
 # kind: Application
 # metadata:
-#   name: secrets-app
+#   name: platform-api-app
 #   namespace: argocd
 #   annotations:
-#     argocd.argoproj.io/sync-wave: "2" 
+#     argocd.argoproj.io/sync-wave: "20" 
 #   finalizers:
 #     - resources-finalizer.argocd.argoproj.io
 # spec:
@@ -12,10 +12,10 @@
 #   source:
 #     repoURL: 'https://github.com/AdhamAyad/KubeVision-Serverless-Platform.git'
 #     targetRevision: main
-#     path: Kubernetes/secrets
+#     path: Kubernetes/api
 #   destination:
 #     server: 'https://kubernetes.default.svc'
-#     namespace: actions-runner-system
+#     namespace: platform-apps
 #   syncPolicy:
 #     automated:
 #       prune: true

@@ -57,7 +57,7 @@ module "ebs_csi_irsa_role" {
   }
 }
 
-// Convert this block to terraform module
+#TODO: Convert this block to terraform module
 data "http" "lb_policy_json" {
   url = "https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/main/docs/install/iam_policy.json"
 }
@@ -90,4 +90,31 @@ resource "aws_eks_pod_identity_association" "lb_controller" {
   namespace       = "kube-system"
   service_account = "aws-load-balancer-controller"
   role_arn        = aws_iam_role.lb_controller_role.arn
+}
+#! End of LB Controller IAM setup
+
+#! Role for GitHub Actions Runner to access ECR
+resource "aws_iam_role" "arc_runner_ecr_role" {
+  name = "${var.project_name}-arc-runner-ecr-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Action = ["sts:AssumeRole", "sts:TagSession"]
+      Effect = "Allow"
+      Principal = { Service = "pods.eks.amazonaws.com" }
+    }]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "arc_runner_ecr_attach" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser"
+  role       = aws_iam_role.arc_runner_ecr_role.name
+}
+
+resource "aws_eks_pod_identity_association" "arc_runner_identity" {
+  cluster_name    = module.eks.cluster_name
+  namespace       = "actions-runner-system"
+  service_account = "platform-runner-gha-rs-no-permission"
+  role_arn        = aws_iam_role.arc_runner_ecr_role.arn
 }
