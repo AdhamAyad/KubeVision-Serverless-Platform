@@ -21,6 +21,8 @@ spec:
         controllerServiceAccount:
           namespace: "actions-runner-system"
           name: "arc-controller-gha-rs-controller"
+        containerMode:
+          type: "dind"
   destination:
     server: https://kubernetes.default.svc
     namespace: actions-runner-system
