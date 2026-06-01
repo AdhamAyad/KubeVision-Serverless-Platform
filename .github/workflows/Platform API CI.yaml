@@ -2,11 +2,11 @@ name: Platform API CI
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - main
-  #   paths:
-  #     - 'platform-api/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'platform-api/**'
 
 env:
   IMAGE_NAME: platform-api
