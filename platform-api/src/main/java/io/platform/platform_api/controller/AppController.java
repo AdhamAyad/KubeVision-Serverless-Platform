@@ -26,8 +26,14 @@ public class AppController {
         boolean isCreated = appService.createApp(request);
 
         if (isCreated) {
+            String appUrl = "https://" + request.getAppName() + ".creative.opik.net";
+            String responseBody = String.format(
+                "{\"message\": \"Application deployed successfully\", \"url\": \"%s\"}", 
+                appUrl
+            );
+
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body("{\"message\": \"Application deployed successfully\"}");
+                    .body(responseBody);
         } else {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body("{\"error\": \"Application already exists in this namespace\"}");
