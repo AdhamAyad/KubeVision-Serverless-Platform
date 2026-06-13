@@ -72,8 +72,8 @@ jobs:
           ignore-unfixed: true
           cache-dir: /tmp/trivy-cache
 
-      - name: Login to Amazon ECR
-        uses: aws-actions/amazon-ecr-login@v2
+      # - name: Login to Amazon ECR
+      #   uses: aws-actions/amazon-ecr-login@v2
 
       - name: Push Image to ECR using Crane
         run: |
