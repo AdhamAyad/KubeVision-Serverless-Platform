@@ -14,11 +14,15 @@ env:
 
 jobs:
   build-test-deploy:
+
     runs-on: platform-runner
+
     container:
       image: maven:3.9-eclipse-temurin-21
+
     permissions:
       contents: write
+
     defaults:
       run:
         working-directory: ./platform-api
@@ -33,13 +37,6 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-
-      # - name: Set up JDK 21
-      #   uses: actions/setup-java@v4
-      #   with:
-      #     java-version: '21'
-      #     distribution: 'temurin'
-      #     cache: 'maven'
 
       - name: Build and analyze with SonarCloud
         env:
@@ -72,9 +69,6 @@ jobs:
           ignore-unfixed: true
           cache-dir: /tmp/trivy-cache
 
-      # - name: Login to Amazon ECR
-      #   uses: aws-actions/amazon-ecr-login@v2
-
       - name: Push Image to ECR using Crane
         working-directory: .
         run: |
@@ -88,6 +82,7 @@ jobs:
             | ./crane auth login ${{ vars.ECR_REGISTRY }} -u AWS --password-stdin          
           ./crane push image.tar \
             ${{ vars.ECR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
       - name: Update ArgoCD Manifests
         working-directory: .
         run: |       
