@@ -21,6 +21,14 @@ spec:
         controllerServiceAccount:
           namespace: "actions-runner-system"
           name: "arc-controller-gha-rs-controller"
+        containerMode:
+          type: "kubernetes"
+          kubernetesModeWorkVolumeClaim:
+            accessModes: ["ReadWriteOnce"]
+            storageClassName: "gp2" 
+            resources:
+              requests:
+                storage: 2Gi
         # containerMode:
         #   type: "dind"
   destination:
