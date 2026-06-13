@@ -60,12 +60,12 @@ jobs:
             --dockerfile=platform-api/Dockerfile
             --no-push
             --destination=${{ vars.ECR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-            --tar-path=/workspace/image.tar
+            --tar-path=image.tar
 
       - name: Trivy Image Scan (Local Tarball)
         uses: aquasecurity/trivy-action@master
         with:
-          input: /workspace/image.tar
+          input: image.tar
           format: table
           exit-code: 0
           severity: CRITICAL,HIGH
@@ -79,7 +79,7 @@ jobs:
         run: |
           curl -sL "https://github.com/google/go-containerregistry/releases/latest/download/go-containerregistry_Linux_x86_64.tar.gz" | tar -xz crane
           chmod +x crane
-          ./crane push /workspace/image.tar ${{ vars.ECR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          ./crane push image.tar ${{ vars.ECR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
       - name: Update ArgoCD Manifests
         working-directory: .
