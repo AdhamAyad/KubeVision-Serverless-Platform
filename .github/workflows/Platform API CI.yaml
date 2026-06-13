@@ -78,14 +78,16 @@ jobs:
       - name: Push Image to ECR using Crane
         working-directory: .
         run: |
-          apt-get update -y && apt-get install -y unzip awscli
+          apt-get update -y && apt-get install -y unzip curl
+          curl -sL "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o awscliv2.zip
+          unzip -q awscliv2.zip
+          ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli
           curl -sL "https://github.com/google/go-containerregistry/releases/latest/download/go-containerregistry_Linux_x86_64.tar.gz" | tar -xz crane
-          chmod +x crane
+          chmod +x crane          
           aws ecr get-login-password --region ${{ env.AWS_REGION }} \
-            | ./crane auth login ${{ vars.ECR_REGISTRY }} -u AWS --password-stdin
+            | ./crane auth login ${{ vars.ECR_REGISTRY }} -u AWS --password-stdin          
           ./crane push image.tar \
             ${{ vars.ECR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-
       - name: Update ArgoCD Manifests
         working-directory: .
         run: |       
