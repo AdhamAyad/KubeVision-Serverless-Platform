@@ -12,7 +12,18 @@ public class AppService {
     
     private final KnativeClient knativeClient;
     private final KnativeHelper knativeHelper;
-    
+    public boolean deleteApp(AppCreateRequest request) {
+
+        if (!knativeHelper.checkAppExists(request)) {
+            return false;
+        }
+
+        knativeClient.services()
+                .inNamespace(request.getNamespace())
+                .withName(request.getAppName())
+                .delete();
+        return true;
+    }
     public boolean createApp(AppCreateRequest request) {
         if (knativeHelper.checkAppExists(request)) {
             return false;

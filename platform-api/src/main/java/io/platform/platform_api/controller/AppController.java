@@ -40,8 +40,17 @@ public class AppController {
         }
     }
 
-    @DeleteMapping("/delete")
-    public void deleteApp() {}
+    @DeleteMapping("/")
+    public ResponseEntity<String> deleteApp(@RequestBody AppCreateRequest request) {
+        boolean isDeleted = appService.deleteApp(request);
+
+        if (isDeleted) {
+            return ResponseEntity.ok("{\"message\": \"Application deleted successfully\"}");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("{\"error\": \"Application not found in this namespace\"}");
+        }
+    }
 
     @GetMapping("/health")
     public ResponseEntity<String> healthCheck() {
