@@ -115,6 +115,6 @@ resource "aws_iam_role_policy_attachment" "arc_runner_ecr_attach" {
 resource "aws_eks_pod_identity_association" "arc_runner_identity" {
   cluster_name    = module.eks.cluster_name
   namespace       = "actions-runner-system"
-  service_account = "platform-runner-gha-rs-no-permission"
+  service_account = "platform-runner-gha-rs-kube-mode"
   role_arn        = aws_iam_role.arc_runner_ecr_role.arn
 }
