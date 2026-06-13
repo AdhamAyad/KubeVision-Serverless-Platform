@@ -42,22 +42,32 @@ jobs:
             -DskipTests
             # -Dsonar.qualitygate.wait=true
 
-      - name: Build Docker Image
-        run: docker build -t ${{ vars.ECR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} .
+      - name: Build Image with Kaniko (No Push)
+        uses: docker://gcr.io/kaniko-project/executor:debug
+        with:
+          args: >-
+            --context=${{ github.workspace }}/platform-api
+            --dockerfile=${{ github.workspace }}/platform-api/Dockerfile
+            --no-push
+            --destination=${{ vars.ECR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            --tar-path=${{ github.workspace }}/image.tar
 
-      - name: Trivy Image Scan
+      - name: Trivy Image Scan (Local Tarball)
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ vars.ECR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          input: ${{ github.workspace }}/image.tar
           format: table
-          exit-code: 0 # Don't fail the build on vulnerabilities, but log them 
+          exit-code: 0
           severity: CRITICAL,HIGH
 
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Push Image to Amazon ECR
-        run: docker push ${{ vars.ECR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+      - name: Push Image to ECR using Crane
+        run: |
+          curl -sL "https://github.com/google/go-containerregistry/releases/latest/download/go-containerregistry_Linux_x86_64.tar.gz" | tar -xz crane
+          chmod +x crane
+          ./crane push ${{ github.workspace }}/image.tar ${{ vars.ECR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
       - name: Update ArgoCD Manifests
         working-directory: .
