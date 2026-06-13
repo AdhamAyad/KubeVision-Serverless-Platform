@@ -70,7 +70,7 @@ jobs:
           exit-code: 0
           severity: CRITICAL,HIGH
           ignore-unfixed: true
-          skip-update: true
+          cache-dir: /tmp/trivy-cache
 
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
