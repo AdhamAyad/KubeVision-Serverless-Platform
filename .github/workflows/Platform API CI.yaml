@@ -16,7 +16,7 @@ jobs:
   build-test-deploy:
     runs-on: platform-runner
     container:
-      image: ubuntu:22.04
+      image: maven:3.9-eclipse-temurin-21
     permissions:
       contents: write
     defaults:
@@ -26,12 +26,20 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
+      - name: Cache Maven packages
+        uses: actions/cache@v4
         with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: 'maven'
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      # - name: Set up JDK 21
+      #   uses: actions/setup-java@v4
+      #   with:
+      #     java-version: '21'
+      #     distribution: 'temurin'
+      #     cache: 'maven'
 
       - name: Build and analyze with SonarCloud
         env:
@@ -57,7 +65,7 @@ jobs:
       - name: Trivy Image Scan (Local Tarball)
         uses: aquasecurity/trivy-action@master
         with:
-          input: ${{ github.workspace }}/image.tar
+          input: image.tar
           format: table
           exit-code: 0
           severity: CRITICAL,HIGH
