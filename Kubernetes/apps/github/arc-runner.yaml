@@ -21,6 +21,10 @@ spec:
         controllerServiceAccount:
           namespace: "actions-runner-system"
           name: "arc-controller-gha-rs-controller"
+        template:
+          spec:
+            securityContext:
+              fsGroup: 1001
         containerMode:
           type: "kubernetes"
           kubernetesModeWorkVolumeClaim:
