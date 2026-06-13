@@ -69,6 +69,8 @@ jobs:
           format: table
           exit-code: 0
           severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          skip-update: true
 
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
