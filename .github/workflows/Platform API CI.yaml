@@ -76,6 +76,7 @@ jobs:
       #   uses: aws-actions/amazon-ecr-login@v2
 
       - name: Push Image to ECR using Crane
+        working-directory: .
         run: |
           curl -sL "https://github.com/google/go-containerregistry/releases/latest/download/go-containerregistry_Linux_x86_64.tar.gz" | tar -xz crane
           chmod +x crane
