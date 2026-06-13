@@ -48,11 +48,11 @@ jobs:
         uses: docker://gcr.io/kaniko-project/executor:debug
         with:
           args: >-
-            --context=${{ github.workspace }}/platform-api
-            --dockerfile=${{ github.workspace }}/platform-api/Dockerfile
+            --context=platform-api
+            --dockerfile=platform-api/Dockerfile
             --no-push
             --destination=${{ vars.ECR_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-            --tar-path=${{ github.workspace }}/image.tar
+            --tar-path=image.tar
 
       - name: Trivy Image Scan (Local Tarball)
         uses: aquasecurity/trivy-action@master
