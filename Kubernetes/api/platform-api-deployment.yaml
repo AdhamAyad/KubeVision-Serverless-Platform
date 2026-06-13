@@ -17,7 +17,7 @@ spec:
       serviceAccountName: api-sa
       containers:
         - name: platform-api
-          image: 439328746854.dkr.ecr.us-east-1.amazonaws.com/platform-api:51a5f2dfa2c65aa472882743699212de640191f6
+          image: 439328746854.dkr.ecr.us-east-1.amazonaws.com/platform-api:774e7068aa571896afc1fc3433d2b7455c0af22c
           imagePullPolicy: Always
           ports:
             - containerPort: 8080 
