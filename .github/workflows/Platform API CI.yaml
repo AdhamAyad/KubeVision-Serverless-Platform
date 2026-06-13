@@ -78,7 +78,7 @@ jobs:
       - name: Push Image to ECR using Crane
         working-directory: .
         run: |
-          apk add --no-cache unzip aws-cli
+          apt-get update -y && apt-get install -y unzip awscli
           curl -sL "https://github.com/google/go-containerregistry/releases/latest/download/go-containerregistry_Linux_x86_64.tar.gz" | tar -xz crane
           chmod +x crane
           aws ecr get-login-password --region ${{ env.AWS_REGION }} \
