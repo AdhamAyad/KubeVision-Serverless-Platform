@@ -3,6 +3,8 @@ kind: InferenceService
 metadata:
   name: model
   namespace: default
+  annotations:
+    serving.kserve.io/ingress-class: "istio"
 spec:
   predictor:
     runtime: kserve-sklearn
