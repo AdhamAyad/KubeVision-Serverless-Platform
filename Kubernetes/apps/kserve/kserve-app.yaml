@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kserve-app
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "10" 
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: ghcr.io/kserve/charts
+    chart: kserve-resources
+    targetRevision: 0.18.0
+    helm:
+      values: |
+        kserve:
+          controller:
+            deploymentMode: "Knative"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kserve
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
