@@ -9,6 +9,7 @@ spec:
   predictor:
     runtime: kserve-sklearn
     model:
+      name: ""
       modelFormat:
         name: sklearn
         version: "1"
