@@ -1,22 +1,13 @@
-apiVersion: serving.kserve.io/v1beta1
-kind: InferenceService
-metadata:
-  name: sklearn-iris-test
-  namespace: default
-spec:
-  predictor:
-    runtime: kserve-sklearn
-    containers:
-      - name: kserve-container
-        resources:
-          requests:
-            cpu: "100m"
-            memory: "256Mi"
-          limits:
-            cpu: "500m"
-            memory: "512Mi"
-    model:
-      modelFormat:
-        name: sklearn
-        version: "1"
-      storageUri: "gs://kfserving-examples/models/sklearn/1.0/model"
+# apiVersion: serving.kserve.io/v1beta1
+# kind: InferenceService
+# metadata:
+#   name: model
+#   namespace: default
+# spec:
+#   predictor:
+#     runtime: kserve-sklearn
+#     model:
+#       modelFormat:
+#         name: sklearn
+#         version: "1"
+#       storageUri: "gs://kfserving-examples/models/sklearn/1.0/model"
