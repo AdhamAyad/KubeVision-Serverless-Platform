@@ -18,6 +18,22 @@ spec:
         kserve:
           controller:
             deploymentMode: "Knative"
+            configmap:
+              ingress: |-
+                {   
+                    "enableGatewayApi": false,
+                    "ingressGateway" : "istio-system/kubevision-gateway",
+                    "localGateway" : "knative-serving/knative-local-gateway",
+                    "localGatewayService" : "knative-local-gateway.istio-system.svc.cluster.local",
+                    "ingressDomain"  : "creative.opik.net",
+                    "ingressClassName" : "istio",
+                    "domainTemplate": "{{ .Name }}.{{ .IngressDomain }}",
+                    "urlScheme": "https",
+                    "disableIstioVirtualHost": false,
+                    "disableIngressCreation": false,
+                    "disableHTTPRouteTimeout": false,
+                    "pathTemplate": ""
+                }
   destination:
     server: https://kubernetes.default.svc
     namespace: kserve
