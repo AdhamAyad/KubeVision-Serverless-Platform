@@ -6,18 +6,6 @@ metadata:
 spec:
   predictor:
     runtime: kserve-sklearn
-    componentSpecs:
-      - predictor:
-          spec:
-            containers:
-              - name: kserve-container
-                resources:
-                  requests:
-                    cpu: "100m"
-                    memory: "256Mi"
-                  limits:
-                    cpu: "500m"
-                    memory: "512Mi"
     model:
       modelFormat:
         name: sklearn
