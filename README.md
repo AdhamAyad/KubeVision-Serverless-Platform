@@ -272,7 +272,3 @@ cd Terraform
 terraform destroy -auto-approve
 
 ```
-
-```
-
-```
