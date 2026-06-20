@@ -37,6 +37,8 @@ minio:
     storageClass: "gp2"
     size: 10Gi
     accessMode: ReadWriteOnce
+    annotations:
+      argocd.argoproj.io/sync-wave: "1"
 
 #! DISABLE OTHER STACKS TEMPORARILY
 prometheus:
