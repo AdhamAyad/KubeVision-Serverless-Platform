@@ -1,0 +1,44 @@
+#? MINIO CONFIGURATION (For Tempo Traces)
+minio:
+  enabled: true
+  mode: standalone
+  replicas: 1
+
+  #TODO: move these to sealed secrets
+  rootUser: "admin"
+  rootPassword: "KubeVisionAdminPassword123!"
+
+  buckets:
+    - name: platform-tempo-traces
+      policy: none  
+      purge: false
+
+  users:
+    - accessKey: "tempo-user"
+      secretKey: "TempoSuperSecretKey123!"
+      policy: "readwrite"
+
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "256Mi"
+    limits:
+      cpu: "500m"
+      memory: "1Gi"
+  persistence:
+    enabled: true
+    storageClass: "gp2"
+    size: 10Gi
+    accessMode: ReadWriteOnce
+
+#! DISABLE OTHER STACKS TEMPORARILY
+prometheus:
+  enabled: false
+loki:
+  enabled: false
+tempo:
+  enabled: false
+alloy:
+  enabled: false
+grafana:
+  enabled: false
