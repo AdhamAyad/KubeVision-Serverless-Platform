@@ -1,4 +1,4 @@
-#? MINIO CONFIGURATION (For Tempo Traces)
+# MINIO CONFIGURATION (For Tempo Traces)
 minio:
   enabled: true
   mode: standalone
