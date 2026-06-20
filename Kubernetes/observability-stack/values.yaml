@@ -25,6 +25,7 @@ minio:
     limits:
       cpu: "500m"
       memory: "1Gi"
+
   persistence:
     enabled: true
     storageClass: "gp2"
