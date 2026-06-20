@@ -38,7 +38,7 @@ minio:
     size: 10Gi
     accessMode: ReadWriteOnce
     annotations:
-      argocd.argoproj.io/sync-wave: "2"
+      argocd.argoproj.io/sync-wave: "1"
 
 #! DISABLE OTHER STACKS TEMPORARILY
 prometheus:
