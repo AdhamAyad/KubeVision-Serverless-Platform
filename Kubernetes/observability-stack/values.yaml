@@ -4,9 +4,14 @@ minio:
   mode: standalone
   replicas: 1
 
+  additionalAnnotations: 
+    argocd.argoproj.io/sync-wave: "1"
+  service:
+    annotations:
+      argocd.argoproj.io/sync-wave: "1"
+
   #TODO: move these to sealed secrets
-  rootUser: "admin"
-  rootPassword: "KubeVisionAdminPassword123!"
+  existingSecret: "minio-auth-secret"
 
   buckets:
     - name: platform-tempo-traces
@@ -15,7 +20,8 @@ minio:
 
   users:
     - accessKey: "tempo-user"
-      secretKey: "TempoSuperSecretKey123!"
+      existingSecret: "minio-auth-secret"
+      existingSecretKey: "tempoPassword"
       policy: "readwrite"
 
   resources:
