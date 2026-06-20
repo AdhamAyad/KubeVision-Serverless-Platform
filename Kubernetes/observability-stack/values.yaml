@@ -57,9 +57,6 @@ tempo:
             name: minio-auth-secret
             key: tempoPassword
 
-  extraArgs:
-    - "-config.expand-env=true"
-
   tempo:
     storage:
       trace:
@@ -69,8 +66,6 @@ tempo:
           endpoint: observability-stack-app-minio.observability.svc.cluster.local:9000
           insecure: true
           forcepathstyle: true #? MinIO requires path-style access
-          access_key: "${AWS_ACCESS_KEY_ID}"
-          secret_key: "${AWS_SECRET_ACCESS_KEY}" 
 
 #! DISABLE OTHER STACKS TEMPORARILY
 prometheus:
