@@ -48,12 +48,20 @@ tempo:
     enabled: false
 
   tempo:
+    env:
+        - name: AWS_ACCESS_KEY_ID
+          value: "tempo-user"
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio-auth-secret
+              key: tempoPassword
     storage:
       trace:
         backend: s3   
         s3:           
           bucket: platform-tempo-traces
-          endpoint: observability-stack-app-minio.observability.svc.cluster.local:9000
+          endpoint: observability-stack-app-minio...
           access_key: "tempo-user"
           secret_key: "TempoSuperSecretKey123!"
           insecure: true
