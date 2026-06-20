@@ -54,10 +54,10 @@ tempo:
         s3:           
           bucket: platform-tempo-traces
           endpoint: observability-stack-app-minio.observability.svc.cluster.local:9000
+          access_key: "tempo-user"
+          secret_key: "TempoSuperSecretKey123!"
           insecure: true
           forcepathstyle: true #? MinIO requires path-style access
-          access_key: "tempo-user"
-          secret_key: "TempoSuperSecretKey123!" 
 
 #! DISABLE OTHER STACKS TEMPORARILY
 prometheus:
