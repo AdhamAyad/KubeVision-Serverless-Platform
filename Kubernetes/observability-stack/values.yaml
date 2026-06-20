@@ -47,14 +47,15 @@ tempo:
   metricsGenerator:
     enabled: false
 
-  env:
-    - name: AWS_ACCESS_KEY_ID
-      value: "tempo-user"
-    - name: AWS_SECRET_ACCESS_KEY
-      valueFrom:
-        secretKeyRef:
-          name: minio-auth-secret
-          key: tempoPassword
+  global:
+    extraEnv:
+      - name: AWS_ACCESS_KEY_ID
+        value: "tempo-user"
+      - name: AWS_SECRET_ACCESS_KEY
+        valueFrom:
+          secretKeyRef:
+            name: minio-auth-secret
+            key: tempoPassword
 
   tempo:
     storage:
