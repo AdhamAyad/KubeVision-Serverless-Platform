@@ -35,29 +35,36 @@ minio:
 #? Tempo Configuration
 tempo:
   enabled: true
-
   annotations:
     argocd.argoproj.io/sync-wave: "2"
   service:
     annotations:
       argocd.argoproj.io/sync-wave: "2"
 
+  extraEnv:
+    - name: AWS_ACCESS_KEY_ID
+      value: "tempo-user"
+    - name: AWS_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: minio-auth-secret
+          key: tempoPassword
+
   persistence:
     enabled: false
   metricsGenerator:
     enabled: false
 
-  tempo:
-    storage:
-      trace:
-        backend: s3   
-        s3:           
-          bucket: platform-tempo-traces
-          endpoint: observability-stack-app-minio.observability.svc.cluster.local:9000
-          access_key: "tempo-user"
-          secret_key: "TempoSuperSecretKey123!"
-          insecure: true
-          forcepathstyle: true #? MinIO requires path-style access
+  storage:
+    trace:
+      backend: s3   
+      s3:           
+        bucket: platform-tempo-traces
+        endpoint: observability-stack-app-minio.observability.svc.cluster.local:9000
+        insecure: true
+        forcepathstyle: true #? MinIO requires path-style access
+        access_key: "${AWS_ACCESS_KEY_ID}"
+        secret_key: "${AWS_SECRET_ACCESS_KEY}" 
 
 #! DISABLE OTHER STACKS TEMPORARILY
 prometheus:
